@@ -15,7 +15,7 @@ Things you may want to cover:
 
 * Html, CSS, Bootstrap
 
-* JQuery, JS(JavaScript)  
+* JQuery, JS (JavaScript)  
 
 Click Wiki for a more detailed project description
   
