@@ -11,7 +11,7 @@ Things you may want to cover:
 
 * MVC Pattern 
 
-* Ajax 
+* Asynchronous Communication using Ajax 
 
 * Html, CSS, Bootstrap
 
