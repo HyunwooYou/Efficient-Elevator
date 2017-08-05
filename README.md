@@ -1,2 +1,21 @@
 # Efficient-Elevator
-출퇴근 상황과 특정 층 수 이동을 고려한 고성능 엘리베이터  
+This README would normally document whatever steps are necessary to get the application up and running.
+
+Things you may want to cover:
+
+* Springboot Framework  
+
+* Java8 Version  
+
+* Sing Thread Executor 
+
+* MVC Pattern 
+
+* Ajax 
+
+* Html, CSS, Bootstrap
+
+* JQuery, JS(JavaScript)  
+
+Click Wiki for a more detailed project description
+  
