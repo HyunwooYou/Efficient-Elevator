@@ -1,0 +1,14 @@
+package com.elevator.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Mode {
+	
+	private String elevMode; 
+}
+

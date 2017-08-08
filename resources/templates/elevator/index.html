@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bubble Project</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- CSS -->
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+ul.nav {
+	background-color: rgba(201, 201, 201, .5);
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.container {
+	width: 1840px;
+	margin-top: 10px;
+	margin-bottom: 10px;	
+}
+/*
+          * 엘레베이터 층수에 대한 디자인 
+          */
+.floor10, .floor9, .floor8, .floor7, .floor6, .floor5, .floor4, .floor3, .floor2, .floor1 {
+	/* border: groove; */         
+	height: 100px;
+	width: 1810px;	
+	padding-left:1760px;
+	padding-top: 20px;
+	color: white;
+	font-size: 50px;
+}
+
+/*
+		 * Bubble1 bubble.
+		 */
+.elevBubble1 {
+	margin-left: 400px;
+	margin-top: 900px;
+	width: 110px;
+	height: 93px;	
+	position: absolute;
+	
+}
+/*
+		 * Bubble2del bubble.
+		 */
+.elevBubble2 {
+	margin-left: 400px;
+	margin-top: 450px;
+	width: 110px;
+	height: 93px;	
+	position: absolute;
+	top: 50px;
+	left: 250px
+}
+/*
+		 * Sky.
+		 */
+.elevSky {
+	margin-left: 400px;	
+	width: 110px;
+	height: 93px;	
+	position: absolute;	
+	left: 500px
+}
+/*
+		 * Bubble4.
+		 */
+.elevEven {
+	margin-left: 400px;
+	margin-top: 750px;
+	width: 110px;
+	height: 93px;	
+	position: absolute;
+	top: 50px;
+	left: 750px
+}
+/*
+		 * Bubble5.
+		 */
+.elevOdd {
+	margin-left: 400px;
+	margin-top: 250px;
+	width: 110px;
+	height: 93px;	
+	position: absolute;
+	top: 50px;
+	left: 1000px
+}
+		 
+/*
+		 * 엘레베이터를 보여주는 div. 
+		 */
+.showElev {
+	color: white;	
+	margin-left: 20px;	
+	height: 150px;
+}
+/*
+		 * 엘레베이터 이미지
+		 */
+.elevImage {
+	width: 200px;
+	height: 200px;
+}
+/*
+		 * 엘레베이터 상태
+		 */
+.elevState {
+	margin-left: 15px;
+	margin-top: 10px;
+	float: left;
+	font-size: 20px;
+}
+/*
+		 * 엘레베이터 이름 
+		 */
+.elevName {	
+	font-size: 24px;
+	color: #3162C7;
+}
+
+
+/* 배경이미지 시간차로 바꾸기  */
+.intro-wrap {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.bgwrap {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.intro-wrap>.bgwrap>div {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	text-align: center;
+}
+
+.intro-wrap>.bgwrap>div>img {
+	height: 100%;
+	width: auto;
+	max-width: inherit;
+}
+
+.boxForUser {
+	border-bottom:1px solid white;		
+	width: 1800px;
+	height: 60px;
+}
+
+#transBtn {			
+	border: 0;
+	background-color: transparent !important;
+	font-weight: bold;
+	font-size: 22px;
+	height: 60px;
+	float: left;	
+}
+
+
+#start {
+	margin-left: 50px;
+	margin-top: 15px;
+	font-weight: bold;
+	font-size: 20px;
+	width: 50px;
+	height: 30px;
+	float:left;	
+}
+
+#dest {
+	margin-left: 20px;
+	margin-top: 15px;
+	font-weight: bold;
+	font-size: 20px;
+	width: 50px;
+	height: 30px;
+	float:left;	
+}
+
+.userInput {
+	margin-left: 400px;	
+	width: 200px;
+	height: 600px;
+}
+
+#bubble1Pop, #bubble2Pop, #skyPop, #evenPop, #oddPop {
+	float: left;
+	border: 0;
+	color: #A5A5A5;
+	background-color: transparent !important;
+	font-size: 25px;
+	margin-left: 20px;
+	margin-top: 8px;	
+	float: left;
+}
+
+#bubble1Bubble, #bubble2Bubble, #skyBubble, #evenBubble, #oddBubble {
+	font-weight: bold;	
+	font-size: 21px;
+}
+
+#Bubble1, #Bubble2, #Sky, #EvenBubble, #OddBubble {
+	font-weight: bold;
+	float: left;	
+	margin-top: 20px;
+	font-size: 17px;
+	color: white;
+	float: left;
+}
+
+.waitList{
+	margin-left: 50px;
+	display: none;
+	border: groove;
+}
+</style>
+
+
+<!-- User 출발층,도착층  input -->
+<script>
+function userInputForm() {			
+		
+	var userFrom = $("#start option:selected").val();;	// 사용자가 지정한 출발층. 
+	var userTo = $("#dest option:selected").val(); 	// 사용자가 지정한 도착층.  
+
+	//console.log("From : " + userFrom + " To : " + userTo);
+	
+	var form = {
+		from : userFrom,
+		to : userTo
+	};
+	
+	$.ajax({
+		type : "POST",
+		url : "userFromTo",
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		data: JSON.stringify(form),		 		
+		success : function(data) {
+			//console.log(data);		        			        	
+		}		
+	}).done(function(data) { // ajax 요청이 성공했을 때 발생하는 function.				
+		console.log('User input success.');
+	}).fail(function() { // ajax 요청이 실패했을 때 발생하는 function. 
+		console.log('User input fail.');
+	});
+};
+</script>
+
+<!-- Random input -->
+<script>
+function randomInput() {			
+	$.ajax({
+		type : "POST",
+		url : "random",
+		data: {
+			Name: 'random'
+		},
+		dataType : "json", // xml, json, script, html이 될 수 있다. 
+		contentType : "application/json; charset=UTF-8",		
+		success : function(data) {
+			//console.log(data);		        			        	
+		}		
+	}).done(function(data) { // ajax 요청이 성공했을 때 발생하는 function.				
+		//console.log('Random input success.');
+	})
+	/* AJAX 성공시 실행되는 function end */
+	.fail(function() { // ajax 요청이 실패했을 때 발생하는 function. 
+		//console.log('Random input fail.');
+	});
+};
+</script>
+
+<!-- 서버와의 ajax 소통 방식  -->
+<script>
+	var form = {
+		elev1 : "\"elev1\":\"-Floor:-1-Persons:-0-State:-STOP-\"", // Normal
+		elev2 : "\"elev2\":\"-Floor:-5-Persons:-0-State:-STOP-\"", // Normal
+		elev3 : "\"elev3\":\"-Floor:-8-Persons:-0-State:-STOP-\"", // Normal
+		elev4 : "\"elev4\":\"-Floor:-2-Persons:-0-State:-STOP-\"", // Even
+		elev5 : "\"elev5\":\"-Floor:-7-Persons:-0-State:-STOP-\"",  // Odd 
+		
+		persons : "" // waiting perosns.
+	};
+
+	/*
+	 * Normal, Seabed, Coast 모드를 결정짓는다. 
+	 *
+	 * Normal = 1
+	 * Seabed = 2
+	 * Coast  = 3
+	 */
+	var mode=1;  
+
+ 	// normal mode로 변환 
+	function normalMode(){mode = 1;};
+	// seabed mode로 변환 
+	function seabedMode(){mode = 2;};
+	// coast mode로 변환 
+	function coastMode(){mode = 3;};	 
+	
+	var str; // split을 위한 temporary variable. 
+	var strArray; // split한 결과를 담기 위한 temporary variable.
+	
+	var preBubble1Floor=1, preBubble2Floor=5, preSkyFloor=8, preEvenFloor=2, preOddFloor=7; 
+	
+	// Normal1
+	var bubble1Floor, bubble1Person, bubble1State;
+	bubble1Floor=bubble1Person=bubble1State = "";
+	
+	// Normal2
+	var bubble2Floor, bubble2Person, bubble2State;
+	bubble2Floor=bubble2Person=bubble2State="";
+	
+	// Normal3
+	var skyFloor, skyPerson, skyState;
+	skyFloor=skyPerson=skyState="";
+	
+	// Even elevator
+	var evenFloor, evenPerson, evenState;
+	evenFloor=evenPerson=evenState="";
+	
+	// Odd elevator
+	var oddFloor, oddPerson, oddState;
+	oddFloor=oddPerson=oddState="";	
+	
+	var first_start = 1; // update문을 처음 시작하는 조건문 
+	var start = 1; //
+	
+	var value = []; // ArrayList 값을 받을 변수를 선언 
+			
+	var refInterval = window.setInterval('update()', 400); // 0.5초마다 실행시킨다. 			
+	
+	// 0.5초마다 실행되는 함수 실행.
+	var update = function() {			
+		
+		// mode 값을 저장하는 form.
+		var modeForm = {
+			elevMode : mode
+		};				
+		
+		/*
+		 * 서버에 mode상태를 알려준다. 
+		 */
+		$.ajax({
+			type : "POST",
+			url : "mode",
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			data: JSON.stringify(modeForm), // mode의 값을 포함하고 있는 데이터 		 		
+			success : function(data) {
+				//console.log(data);		        			        	
+			}		
+		}).done(function(data) { // ajax 요청이 성공했을 때 발생하는 function.				
+			//console.log("Present mode : " + mode);
+		}).fail(function() { // ajax 요청이 실패했을 때 발생하는 function. 
+			console.log("Mode fail.");
+		});	
+		
+		/*
+		 * waitingPersons에 대한 정보를 요청한다. 
+		 */		 		 
+		 $.post(
+	        "wait", 			        
+	        function(retVal) {
+	            if(retVal.code == "OK") { //controller에서 넘겨준 성공여부 코드
+	                 
+	               values = retVal.persons ; //java에서 정의한 ArrayList명을 적어준다.
+	               $(".showTable").click(function(){
+	                	$("#tableList").empty();
+	                	$.each(values, function( index, value ) {
+	                    	
+	                    	$("#tableList").append("<h4>" + 
+	                    			"Start : " + value.fromFloor + 
+	                    			" Dest : " + value.toFloor + "</h4>");	                       			                  
+	                    });	
+	                });
+	            }
+	            else {
+	            	console.log("waitingPersons fail");
+	            }                   
+	        }
+	    ); 		 				 
+		/*
+		 * 서버상에서 모든 bubble을 정보를 받아온다. 
+		 */
+		$.ajax({
+			type : "POST",
+			url : "check",
+			dataType : "html",
+			contentType : "application/json; charset=UTF-8",
+			data : JSON.stringify(form),
+			success : function(data) {				        			        
+		}
+		/*
+		 * AJAX 전송과 응답이 성공했을시 발생하는 function. 
+		 */
+		}).done(function(data) {									
+			
+			// mode 값을 console창에 보여준다. 
+			//console.log("mode : " + mode);
+			
+			// 데이터 split 과정. 
+			str = data;
+			strArray = str.split("-");					
+			
+			/*
+			 * Bubble info 
+			 * 1. Floor
+			 * 2. Person
+			 * 3. State
+			 */
+			// Bubble1 bubble
+			bubble1Floor = strArray[2]/10;
+			bubble1Person = strArray[4];
+			bubble1State = strArray[6];
+
+			// Bubble2
+			bubble2Floor = strArray[9]/10;
+			bubble2Person = strArray[11];
+			bubble2State = strArray[13];
+			
+			// Sky 
+			skyFloor = strArray[16]/10;
+			skyPerson = strArray[18];
+			skyState = strArray[20];			
+			
+			// Even Bubble
+			evenFloor = strArray[23]/10;
+			evenPerson = strArray[25];
+			evenState = strArray[27];
+			
+			// Odd Bubble 
+			oddFloor = strArray[30]/10;
+			oddPerson = strArray[32];
+			oddState = strArray[34];
+						
+			
+			/*
+			 * Bubble1, Bubble2, Sky, Even Bubble, Odd Bubble에 대한 정보 시각화. 
+			 */
+			 // Bubble1
+			$("#bubble1FloorSpan").html(bubble1Floor);
+			$("#bubble1PersonSpan").html(bubble1Person);
+			$("#bubble1StateSpan").html(bubble1State);
+			
+			$("#bubble1FloorSpan2").html(bubble1Floor);
+			$("#bubble1PersonSpan2").html(bubble1Person);
+			$("#bubble1StateSpan2").html(bubble1State);
+			/*	*  *  *  *  */					
+			
+			// Bubble2
+			$("#bubble2FloorSpan").html(bubble2Floor);
+			$("#bubble2PersonSpan").html(bubble2Person);
+			$("#bubble2StateSpan").html(bubble2State);
+			
+			$("#bubble2FloorSpan2").html(bubble2Floor);
+			$("#bubble2PersonSpan2").html(bubble2Person);
+			$("#bubble2StateSpan2").html(bubble2State);
+			/*	*  *  *  *  */
+			
+			// Sky
+			$("#skyFloorSpan").html(skyFloor);
+			$("#skyPersonSpan").html(skyPerson);
+			$("#skyStateSpan").html(skyState);
+			 
+			$("#skyFloorSpan2").html(skyFloor);
+			$("#skyPersonSpan2").html(skyPerson);
+			$("#skyStateSpan2").html(skyState);			
+			/*	*  *  *  *  */
+			
+			// Even Bubble
+			$("#evenFloorSpan").html(evenFloor);
+			$("#evenPersonSpan").html(evenPerson);
+			$("#evenStateSpan").html(evenState);
+			 
+			$("#evenFloorSpan2").html(evenFloor);
+			$("#evenPersonSpan2").html(evenPerson);
+			$("#evenStateSpan2").html(evenState);			
+			/*	*  *  *  *  */
+			
+			// Odd Bubble 
+			$("#oddFloorSpan").html(oddFloor);
+			$("#oddPersonSpan").html(oddPerson);
+			$("#oddStateSpan").html(oddState);
+			 
+			$("#oddFloorSpan2").html(oddFloor);
+			$("#oddPersonSpan2").html(oddPerson);
+			$("#oddStateSpan2").html(oddState);			
+			/*	*  *  *  *  */
+			
+			/* * * * * * * *		    	
+			 * 엘레베이터 컨트롤  * 		    	 
+			 * * * * * * * */			 
+			 if(start == 1){
+				console.log("처음");	
+				mode = 1;
+				start = 0;
+			 }else{
+				 	function userInputForm() {	
+						bubble1State = "STOP";
+						bubble2State = "STOP";
+						skyState = "STOP";
+						evenState = "STOP";
+						oddState = "STOP";						
+					}
+					// Control Bubble1
+					if(preBubble1Floor < bubble1Floor){
+						$(function() {
+							$('.elevBubble1').animate({
+								"top" : "-=100"
+							}, 1000);
+						});
+					}else if(preBubble1Floor > bubble1Floor){
+						$(function() {
+							$('.elevBubble1').animate({
+								"top" : "+=100"
+							}, 1000);
+						});
+					}else{
+						//console.log("Bubble1 bubble는 멈춰있습니다.");
+					}				
+						
+					// Control Bubble2
+					if(preBubble2Floor < bubble2Floor){
+						$(function() {
+							$('.elevBubble2').animate({
+								"top" : "-=100"
+							}, 1000);
+						});
+					}else if(preBubble2Floor > bubble2Floor){
+						$(function() {
+							$('.elevBubble2').animate({
+								"top" : "+=100"
+							}, 1000);
+						});
+					}else{
+						//console.log("Bubble2는 멈춰있습니다.");
+					}				
+					
+					// Control Sky 
+					if(preSkyFloor < skyFloor){
+						$(function() {
+							$('.elevSky').animate({
+								"top" : "-=900"
+							}, 2000);
+						});
+					}else if(preSkyFloor > skyFloor){
+						$(function() {
+							$('.elevSky').animate({
+								"top" : "+=900"
+							}, 2000);
+						});
+					}else{
+						//console.log("Sky는 멈춰있습니다.");
+					}			
+					
+					/* * * * * * * * Special Elevator part * * * * * * * */
+					// Control Even bubble 
+					if(preEvenFloor < evenFloor){
+						$(function() {
+							$('.elevEven').animate({
+								"top" : "-=200"
+							}, 1000);
+						});
+					}else if(preEvenFloor > evenFloor){
+						$(function() {
+							$('.elevEven').animate({
+								"top" : "+=200"
+							}, 1000);
+						});
+					}else{
+						//console.log("Even bubble은 멈춰있습니다.");
+					}					
+					
+					// Control Odd bubble  
+					if(preOddFloor < oddFloor){
+						$(function() {
+							$('.elevOdd').animate({
+								"top" : "-=200"
+							}, 1000);
+						});
+					}else if(preOddFloor > oddFloor){
+						$(function() {
+							$('.elevOdd').animate({
+								"top" : "+=200"
+							}, 1000);
+						});
+					}else{
+						//console.log("Odd bubble은 멈춰있습니다.");
+					}					
+					/* 엘레베이터 컨트롤 end */	
+			 }				
+			
+			// 이전층 초기화. 
+			preBubble1Floor = bubble1Floor;
+			preBubble2Floor = bubble2Floor;
+			preSkyFloor = skyFloor; 
+			preEvenFloor = evenFloor;
+			preOddFloor = oddFloor;												
+		})
+		/* AJAX 성공시 실행되는 function end */
+		.fail(function() {
+			console.log('AJAX call failed');
+		});
+	};
+	/* 2초마다 실행되는 함수 실행 end */
+	
+	update();		
+</script>
+
+<!-- Popover function -->
+<script>
+$(document).ready(function(){
+	/* Bubble1에 대한 정보 */
+    $('[data-toggle="bubble1PopOver"]').popover({
+    	html : true,
+    	content : function(){
+    		return $('#bubble1Content').html();
+    	}
+    });   
+    
+	/* Bubble2에 대한 정보 */
+    $('[data-toggle="bubble2PopOver"]').popover({
+    	html : true,
+    	content : function(){
+    		return $('#bubble2Content').html();
+    	}
+    });   
+    
+	/* Sky에 대한 정보 */
+    $('[data-toggle="skyPopOver"]').popover({
+    	html : true,
+    	content : function(){
+    		return $('#skyContent').html();
+    	}
+    });
+	
+    /* Even bubble에 대한 정보 */
+    $('[data-toggle="evenPopOver"]').popover({
+    	html : true,
+    	content : function(){
+    		return $('#evenContent').html();
+    	}
+    });   
+    
+    /* Odd bubble에 대한 정보 */
+    $('[data-toggle="oddPopOver"]').popover({
+    	html : true,
+    	content : function(){
+    		return $('#oddContent').html();
+    	}
+    });   
+});
+</script>
+
+<!-- 범수 div 떴다 안떴다 script start -->
+<script type="text/javascript">
+   var tempY = 0;
+   function newShowHidediv(id, w, h) {
+      var gId = document.getElementById(id);
+      var realX = (document.body.scrollWidth - w) / 2;
+      var realY = (document.documentElement.scrollHeight - h) / 2;
+      if (gId.style.display == "" || gId.style.display == "none") {
+         gId.style.display = "block";
+      } else {
+         gId.style.display = "none";
+      }
+      gId.style.position = "absolute";
+      gId.style.color = "white";
+      gId.style.left = realX + "px";
+      if (tempY != document.body.scrollTop) {
+         realY = document.body.scrollTop + realY;
+      }
+      gId.style.top = "100px";
+      gId.style.left = "0px";
+   }
+
+   function showHidediv(id) {
+      var gId = document.getElementById(id);
+      if (gId.style.display == "none") {
+         gId.style.display = "block";
+      } else {
+         gId.style.display = "none";
+      }   
+   }
+</script>
+<!-- 범수 div 떴다 안떴다 스크립트 end -->
+
+<script type="text/javascript">
+   var image1 = new Image()
+   image1.src = "../img/elevator/bubble1.png"
+   var image2 = new Image()
+   image2.src = "../img/elevator/bubble3.png"
+      var image3 = new Image()
+   image3.src = "../img/elevator/bubble1.png"
+</script>
+</head>
+<body>
+		
+	<div class="container">
+	
+		<!-- 배경이미지 바꾸기 -->
+		<div class="intro-wrap">
+			<div class="bgwrap">
+				<div style="display: block;">
+					<img alt="image_5" src="../img/background/bg0.jpg"/>
+				</div>
+				<div style="display: none;">
+					<img alt="image_5" src="../img/background/bg1.png"/>
+				</div>															
+				<div style="display: none;">
+					<img alt="image_5" src="../img/background/bg2.jpg"/>
+				</div>
+				<div style="display: none;">
+					<img alt="image_5" src="../img/background/bg3.jpg"/>
+				</div>
+				<div style="display: none;">
+					<img alt="image_5" src="../img/background/bg4.jpg"/>
+				</div>																					
+				<div style="display: none;">
+					<img alt="image_5" src="../img/background/bg5.jpg"/>
+				</div>							
+			</div>
+		</div>			
+		<!-- 배경이미지 바꾸기 -->
+		<script type="text/javascript">
+			var $imgList = $('.bgwrap>div');				// bgwrap div 안에 있는 div 자식들을 가져옴
+			var nImgCount = $imgList.children().length;		// 위에서 가져온 div 자식들의 개수	
+			var nDuration = 7000;
+			var bAuto = true;								// 자동으로 변경할 지 여부
+			var nIndex = 0;									// 변경할 이미지의 Index
+			
+			if(bAuto == true) {
+				setInterval(autoSlide, nDuration);			// Javascript setInterval 함수 호출
+			}
+			
+			function autoSlide() {
+				/* 3초마다 이 함수에 들어오게 됨 */
+				
+				var next = (++nIndex % nImgCount);
+				$($imgList.get(next - 1)).fadeOut(2000);
+				$($imgList.get(next)).fadeIn(2000);
+			}				
+			
+		</script>   
+		
+		<!-- class="row" -->
+		<div class="row">
+			<!-- 엘레베이터 시각화  -->
+			<div class="col-md-8">
+				<div class="elevBubble1">
+					<!-- Bubble1-->
+					<img id="Bubble1Img" src="../img/elevator/bubble1.png" name="slide" width="120px"
+						height="120px">
+				</div>
+
+				<div class="elevBubble2">
+					<!-- Bubble2 -->
+					<img id="Bubble2Img" src="../img/elevator/bubble1.png" name="slide1" width="120px"
+						height="120px">
+				</div>
+
+				<div class="elevSky">
+					<!-- Sky -->
+					<img id="SkyImg" src="../img/elevator/bubble1.png" name="slide2" width="120px"
+						height="120px">
+				</div>
+
+				<div class="elevEven">
+					<!-- Even bubble-->
+					<img id="EvenImg" src="../img/elevator/bubble1.png" name="slide2" width="120px"
+						height="120px">
+				</div>
+
+				<div class="elevOdd">
+					<!-- Odd bubble -->
+					<img id="OddImg" src="../img/elevator/bubble1.png" name="slide2" width="120px"
+						height="120px">
+				</div>
+
+				<!-- Bubble 10층 -->
+				<div class="floor10" style="padding-left:1740px;">10</div>
+				<!-- Bubble 9층 -->
+				<div class="floor9">9</div>
+				<!-- Bubble 8층 -->
+				<div class="floor8">8</div>
+
+				<!-- Bubble 7층 -->
+				<div class="floor7">7</div>
+
+				<!-- Bubble 6층 -->
+				<div class="floor6">6</div>
+
+				<!-- Bubble 5층 -->
+				<div class="floor5">5</div>
+
+				<!-- Bubble 4층 -->
+				<div class="floor4">4</div>
+
+				<!-- Bubble 3층 -->
+				<div class="floor3">3</div>
+
+				<!-- Bubble 2층 -->
+				<div class="floor2">2</div>
+
+				<!-- Bubble 1층 -->
+				<div class="floor1">1</div>
+
+				<!-- 사용자 input box -->
+				<div class="boxForUser">
+				
+					<!-- Normal, Seabed, Coast mode -->
+					<button id="transBtn" type="button" class="btn btn-primary btn-lg"
+						onclick="normalMode()">Normal</button>
+					<button id="transBtn" type="button" class="btn btn-primary btn-lg"
+						onclick="seabedMode()">Seabed</button>
+					<button id="transBtn" type="button" class="btn btn-primary btn-lg"
+						onclick="coastMode()">Coast</button>
+					<!-- Normal, Seabed, Coast mode end -->
+					
+					<!-- Random input button -->	
+					<button id="transBtn" type="submit" class="btn btn-primary btn-lg"
+						onclick="randomInput()">Random</button>
+					<!-- Random input button end -->	
+
+					<!-- 출발층, 도착층 입력 -->
+					<select id="start" name="start">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select> <select id="dest" name="dest">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+
+					<button id="transBtn" onclick="userInputForm()" type="submit"
+						class="btn btn-primary btn-lg" style="float: bubble1;">Enter</button>
+					<!-- 출발층, 도착층 입력 end -->
+						
+					
+					<!-- Bubble1 정보 __Popover -->
+					<button id="bubble1Pop" type="button"
+						class="btn btn-default popover-show" data-placement="top"
+						data-container="body" data-toggle="bubble1PopOver">B1</button>
+					<div id="bubble1Content" style="display: none;">
+						<div class="elevName">Bubble1</div>
+						<!-- 엘레베이터 방향 -->
+						<div id="bubble1Bubble">
+							<div style="margin-top: 10px;">
+								<span>Floor : </span> <span id="bubble1FloorSpan">1</span>
+							</div>
+							<!-- 엘레베이터 방향 end -->
+
+							<!-- 엘레베이터 인원수 -->
+							<div style="margin-top: 10px;">
+								<span>State : </span> <span id="bubble1StateSpan">STOP</span>
+							</div>
+							<!-- 엘레베이터 인원수  end-->
+
+							<!-- 남은 자리 -->
+							<div style="margin-top: 10px;">
+								<span>Person : </span> <span id="bubble1PersonSpan">0</span>
+							</div>
+							<!-- 남은 자리 end -->
+						</div>
+					</div>
+					<!-- Bubble1에 대한 실시간 정보 -->
+					<div id="Bubble1">
+						<span id="bubble1FloorSpan2">1</span> <span>-</span> <span
+							id="bubble1StateSpan2">STOP</span> <span>-</span> <span
+							id="bubble1PersonSpan2">0</span>
+
+					</div>
+
+
+
+					<!-- Bubble2 정보 __Popover -->
+					<button id="bubble2Pop" type="button"
+						class="btn btn-default popover-show" data-placement="top"
+						data-container="body" data-toggle="bubble2PopOver">B2</button>
+					<div id="bubble2Content" style="display: none;">
+						<div class="elevName">Bubble2</div>
+						<!-- 엘레베이터 방향 -->
+						<div id="bubble2Bubble">
+							<div style="margin-top: 10px;">
+								<span>Floor : </span> <span id="bubble2FloorSpan">5</span>
+							</div>
+							<!-- 엘레베이터 방향 end -->
+
+							<!-- 엘레베이터 인원수 -->
+							<div style="margin-top: 10px;">
+								<span>State : </span> <span id="bubble2StateSpan">STOP</span>
+							</div>
+							<!-- 엘레베이터 인원수  end-->
+
+							<!-- 남은 자리 -->
+							<div style="margin-top: 10px;">
+								<span>Person : </span> <span id="bubble2PersonSpan">0</span>
+							</div>
+							<!-- 남은 자리 end -->
+						</div>
+					</div>
+					<!-- Bubble2에 대한 실시간 정보 -->
+					<div id="Bubble2">
+						<span id="bubble2FloorSpan2">5</span> <span>-</span> <span
+							id="bubble2StateSpan2">STOP</span> <span>-</span> <span
+							id="bubble2PersonSpan2">0</span>
+					</div>
+
+
+
+					<!-- Sky 정보 __Popover -->
+					<button id="skyPop" type="button"
+						class="btn btn-default popover-show" data-placement="top"
+						data-container="body" data-toggle="skyPopOver">Sky</button>
+					<div id="skyContent" style="display: none;">
+						<div class="elevName">Sky</div>
+						<!-- 엘레베이터 방향 -->
+						<div id="skyBubble">
+							<div style="margin-top: 10px;">
+								<span>Floor : </span> <span id="skyFloorSpan">10</span>
+							</div>
+							<!-- 엘레베이터 방향 end -->
+
+							<!-- 엘레베이터 인원수 -->
+							<div style="margin-top: 10px;">
+								<span>State : </span> <span id="skyStateSpan">STOP</span>
+							</div>
+							<!-- 엘레베이터 인원수  end-->
+
+							<!-- 남은 자리 -->
+							<div style="margin-top: 10px;">
+								<span>Person : </span> <span id="skyPersonSpan">0</span>
+							</div>
+							<!-- 남은 자리 end -->
+						</div>
+					</div>
+					<!-- Sky에 대한 실시간 정보 -->
+					<div id="Sky">
+						<span id="skyFloorSpan2">8</span> <span>-</span> <span
+							id="skyStateSpan2">STOP</span> <span>-</span> <span
+							id="skyPersonSpan2">0</span>
+					</div>
+
+
+
+					<!-- Even bubble 정보 __Popover -->
+					<button id="evenPop" type="button"
+						class="btn btn-default popover-show" data-placement="top"
+						data-container="body" data-toggle="evenPopOver">Even</button>
+					<div id="evenContent" style="display: none;">
+						<div class="elevName">Even bubble</div>
+						<!-- 엘레베이터 방향 -->
+						<div id="evenBubble">
+							<div style="margin-top: 10px;">
+								<span>Floor : </span> <span id="evenFloorSpan">2</span>
+							</div>
+							<!-- 엘레베이터 방향 end -->
+
+							<!-- 엘레베이터 인원수 -->
+							<div style="margin-top: 10px;">
+								<span>State : </span> <span id="evenStateSpan">STOP</span>
+							</div>
+							<!-- 엘레베이터 인원수  end-->
+
+							<!-- 남은 자리 -->
+							<div style="margin-top: 10px;">
+								<span>Person : </span> <span id="evenPersonSpan">0</span>
+							</div>
+							<!-- 남은 자리 end -->
+						</div>
+					</div>
+					<!-- Even bubble에 대한 실시간 정보 -->
+					<div id="EvenBubble">
+						<span id="evenFloorSpan2">2</span> <span>-</span> <span
+							id="evenStateSpan2">STOP</span> <span>-</span> <span
+							id="evenPersonSpan2">0</span>
+					</div>
+
+
+
+					<!-- Odd bubble 정보 __Popover -->
+					<button id="oddPop" type="button"
+						class="btn btn-default popover-show" data-placement="top"
+						data-container="body" data-toggle="oddPopOver">Odd</button>
+					<div id="oddContent" style="display: none;">
+						<div class="elevName">Odd bubble</div>
+						<!-- 엘레베이터 방향 -->
+						<div id="oddBubble">
+							<div style="margin-top: 10px;">
+								<span>Floor : </span> <span id="oddFloorSpan">7</span>
+							</div>
+							<!-- 엘레베이터 방향 end -->
+
+							<!-- 엘레베이터 인원수 -->
+							<div style="margin-top: 10px;">
+								<span>State : </span> <span id="oddStateSpan">STOP</span>
+							</div>
+							<!-- 엘레베이터 인원수  end-->
+
+							<!-- 남은 자리 -->
+							<div style="margin-top: 10px;">
+								<span>Person : </span> <span id="oddPersonSpan">0</span>
+							</div>
+							<!-- 남은 자리 end -->
+						</div>
+					</div>
+					<!-- Odd bubble에 대한 실시간 정보 -->
+					<div id="OddBubble">
+						<span id="oddFloorSpan2">7</span> <span>-</span> <span
+							id="oddStateSpan2">STOP</span> <span>-</span> <span
+							id="oddPersonSpan2">0</span>
+					</div>
+					
+					
+					<button class="showTable" id="transBtn" type="button" 
+					onclick="newShowHidediv('elin', 700, 700);"
+					style="color: white;
+						   float: left;
+						   margin-left: 60px;
+						   font-size: 25px;">Wait list</button>
+
+				<div class="waitList" id="elin">			
+					<div id="tableList" 
+						style="color:white; font-size:20px;
+								padding-left:2px;
+								padding-right:2px;
+								padding-top:2px;
+								padding-bottom:2px;">
+					
+					</div>												
+				</div>
+				</div>						
+
+				<!-- 범수 div 떴다 안떴다  코드 ends -->
+			</div>
+			<!-- 엘레베이터 시각화 end -->	
+		</div>
+		<!-- class="row" end-->
+	</div>
+	<!-- class="container" end -->
+</body>
+</html>
