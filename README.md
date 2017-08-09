@@ -7,6 +7,8 @@ Things you may want to cover:
 
 * Java8 Version  
 
+* JPA
+
 * Sing Thread Executor 
 
 * MVC Pattern 
